@@ -20,7 +20,7 @@ public class ConverterApp {
                     handleWeightConverter();
                     break;
                 case 3:
-                    IO.println("You chose 3rd option");
+                    gradeConverter();
                     break;
                 case 4:
                     IO.println("Goodbye!");
@@ -134,5 +134,39 @@ public class ConverterApp {
 
     public static double convertKilogramToPound(double kilogram) {
         return kilogram * 2.20462;
+    }
+
+    private static float readGrade(String message) {
+        while (true) {
+            try {
+                IO.print(message);
+                float number = scanner.nextFloat();
+                if (number >= 0 && number <= 100) {
+                    return number;
+                } else {
+                    IO.println("Error: The number is out of range! It must be between 0 and 100. ");
+                }
+            } catch (InputMismatchException e) {
+                IO.println("ERROR: Invalid input! Please enter number only.");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    public static void gradeConverter() {
+        IO.println("--- Grade Converter ---");
+        int grade = Math.round(readGrade("Enter grade: "));
+        System.out.print("Grade: ");
+        if (grade < 60) {
+            IO.println("F -> Fail");
+        } else if (grade < 70) {
+            IO.println("D -> Below average");
+        } else if (grade < 80) {
+            IO.println("C -> Pass");
+        } else if (grade < 90) {
+            IO.println("B -> Good");
+        } else {
+            IO.println("A -> Excellent");
+        }
     }
 }
