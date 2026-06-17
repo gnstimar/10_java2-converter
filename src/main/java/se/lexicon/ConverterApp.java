@@ -95,13 +95,13 @@ public class ConverterApp {
         }
     }
 
-    private static double readDouble(String message, boolean isNegativeAllowed) {
+    private static double readDouble(String message, double minLimit) {
         while (true) {
             try {
                 IO.print(message);
                 double number = scanner.nextDouble();
-                if (number < 0 && !isNegativeAllowed) {
-                    IO.println("Error: The number is out of range! It must be a positive number. ");
+                if (number < minLimit) {
+                    IO.println("Error: The number is out of range! It must be bigger than " + minLimit+ ". ");
                 } else {
                     return number;
                 }
@@ -119,11 +119,11 @@ public class ConverterApp {
         IO.println("2. Fahrenheit to Celsius");
         int choice = readInt("Your choice: ");
         if (choice == 1) {
-            double celsius = readDouble("Enter temperature in Celsius: ", true);
+            double celsius = readDouble("Enter temperature in Celsius: ", -273.15);
             double fahrenheit = convertCelsiusToFahrenheit(celsius);
             System.out.printf("%-6s : %-8.2f C = %7.2f F%n", "Result", celsius, fahrenheit);
         } else if (choice == 2) {
-            double fahrenheit = readDouble("Enter temperature in Fahrenheit: ", true);
+            double fahrenheit = readDouble("Enter temperature in Fahrenheit: ", -459.67);
             double celsius = convertFahrenheitToCelsius(fahrenheit);
             System.out.printf("%-6s : %-8.2f F = %7.2f C%n", "Result", fahrenheit, celsius);
         }
@@ -143,7 +143,7 @@ public class ConverterApp {
         IO.println("1. Kilograms to Grams");
         IO.println("2. Kilograms to Pounds");
         int choice = readInt("Your choice: ");
-        double kilogram = readDouble("Enter weight in Kilograms: ", false);
+        double kilogram = readDouble("Enter weight in Kilograms: ", 0.00);
         if (choice == 1) {
             double gram = convertKilogramToGram(kilogram);
             System.out.printf("%-6s : %8.2f kg = %7.2f g%n", "Result", kilogram, gram);
