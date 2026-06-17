@@ -23,11 +23,10 @@ public class ConverterApp {
                     IO.println("You chose 3rd option");
                     break;
                 case 4:
-                    IO.println("You chose 4th option");
+                    IO.println("Goodbye!");
                     break;
                 default:
                     IO.println("Invalid option! Please try again.");
-                    break;
             }
         }
     }
