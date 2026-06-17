@@ -17,7 +17,7 @@ public class ConverterApp {
                     handleTemperatureConverter();
                     break;
                 case 2:
-                    IO.println("You chose 2nd option");
+                    handleWeightConverter();
                     break;
                 case 3:
                     IO.println("You chose 3rd option");
@@ -96,11 +96,11 @@ public class ConverterApp {
         if (choice == 1) {
             double celsius = readDouble("Enter temperature in Celsius: ");
             double fahrenheit = convertCelsiusToFahrenheit(celsius);
-            System.out.printf("%-6s : %-8.2f C = %8.2f F%n", "Result", celsius, fahrenheit);
+            System.out.printf("%-6s : %-8.2f C = %7.2f F%n", "Result", celsius, fahrenheit);
         } else if (choice == 2) {
             double fahrenheit = readDouble("Enter temperature in Fahrenheit: ");
             double celsius = convertFahrenheitToCelsius(fahrenheit);
-            System.out.printf("%-6s : %-8.2f F = %8.2f C%n", "Result", fahrenheit, celsius);
+            System.out.printf("%-6s : %-8.2f F = %7.2f C%n", "Result", fahrenheit, celsius);
         }
     }
 
@@ -110,5 +110,29 @@ public class ConverterApp {
 
     private static double convertFahrenheitToCelsius(double fahrenheit) {
         return (fahrenheit - 32) * 5.0 / 9.0;
+    }
+
+    public static void handleWeightConverter() {
+        IO.println("--- Weight Converter ---");
+        IO.println("Convert:");
+        IO.println("1. Kilograms to Grams");
+        IO.println("2. Kilograms to Pounds");
+        int choice = readInt("Your choice: ");
+        double kilogram = readDouble("Enter weight in Kilograms: ");
+        if (choice == 1) {
+            double gram = convertKilogramToGram(kilogram);
+            System.out.printf("%-6s : %8.2f kg = %7.2f g%n", "Result", kilogram, gram);
+        } else if (choice == 2) {
+            double pound = convertKilogramToPound(kilogram);
+            System.out.printf("%-6s : %8.2f kg = %7.2f lb%n", "Result", kilogram, pound);
+        }
+    }
+
+    public static double convertKilogramToGram(double kilogram) {
+        return kilogram * 1000;
+    }
+
+    public static double convertKilogramToPound(double kilogram) {
+        return kilogram * 2.20462;
     }
 }
