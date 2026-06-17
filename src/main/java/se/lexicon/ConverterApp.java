@@ -7,11 +7,13 @@ public class ConverterApp {
     static Scanner scanner = new Scanner(System.in);
     static String[] converters = {"Temperature Converter", "Weight Converter", "Grade Converter", "Exit"};
     static int option = 0;
+    static boolean shouldContinue = true;
 
     void main() {
-        while (option != converters.length) {
+        while (shouldContinue) {
             displayMenu();
             option = readMenuItemNumber("Choose an option: ");
+            IO.println();
             switch (option) {
                 case 1:
                     handleTemperatureConverter();
@@ -24,10 +26,13 @@ public class ConverterApp {
                     break;
                 case 4:
                     IO.println("Goodbye!");
-                    break;
+                    return;
                 default:
                     IO.println("Invalid option! Please try again.");
             }
+            IO.println();
+            shouldContinue = askToContinue("Continue? (yes/no): ");
+            IO.println();
         }
     }
 
@@ -54,6 +59,21 @@ public class ConverterApp {
             } catch (InputMismatchException e) {
                 IO.println("ERROR: Invalid input! Please enter number only.");
                 scanner.nextLine();
+            }
+        }
+    }
+
+    public static boolean askToContinue(String message) {
+        while (true) {
+            IO.print(message);
+            String answer = scanner.next();
+            if (answer.equalsIgnoreCase("yes")) {
+                return true;
+            } else if (answer.equalsIgnoreCase("no")) {
+                IO.println("Goodbye!");
+                return false;
+            } else {
+                IO.println("Error: Invalid input! Please type 'yes' or 'no'.");
             }
         }
     }
